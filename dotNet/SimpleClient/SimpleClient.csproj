@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ApplicationIcon />
+    <StartupObject></StartupObject>
+    <AssemblyName>SimpleClient</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuthAPI\AuthAPI.csproj" />
+  </ItemGroup>
+
+</Project>

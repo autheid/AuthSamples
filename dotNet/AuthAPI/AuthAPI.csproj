@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="rp.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Grpc" Version="1.17.0" />
+    <PackageReference Include="Grpc.Tools" Version="1.17.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProtoBuf Include="rp.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+</Project>
