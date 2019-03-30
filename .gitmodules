@@ -1,0 +1,3 @@
+[submodule "AuthAPI"]
+	path = AuthAPI
+	url = https://github.com/autheid/AuthAPI
