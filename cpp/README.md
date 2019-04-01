@@ -1,6 +1,6 @@
-Device key example:
+# Device key C++ example
 
-## Install libs
+## Download
 
 ### gRPC
 
@@ -67,4 +67,6 @@ Please set `GRPC_DEFAULT_SSL_ROOTS_FILE_PATH` env variable on Windows before sta
 
 For example:
 
-`set GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=c:\path\to\this\file\grpc\etc\roots.pem`
+```
+set GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=c:\path\to\this\file\grpc\etc\roots.pem
+```
