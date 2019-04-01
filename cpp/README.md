@@ -25,18 +25,14 @@ python configure.py --amalgamation --single-amalgamation-file --minimized-build 
 
 ## Build
 
-Download and install:
-
-Common:
+### Common build prerequisites:
 
 - CMake
 - Go (required for gRPC SSL build)
 - Perl (required for gRPC SSL build)
 - Python (required for Botan build)
 
-Windows:
-
-- MSVC (Tested with MSVC 2017)
+### Linux/macOS:
 
 ```
 cd /path/to/this/file
@@ -44,12 +40,31 @@ git submodule init
 git submodule update
 mkdir build
 cd build
+cmake ..
+make -j $(nproc)
+```
+
+
+### Windows:
+
+Download and install:
+
+- MSVC (Tested with MSVC 2017)
+
+```
+cd c:\path\to\this\file
+git submodule init
+git submodule update
+mkdir build
+cd build
 cmake .. -A x64
-cmake --build ./ # or `make -j $(nproc)` on *nix
+cmake --build ./
 ```
 
 Windows build should be made in MSVC "x64 Native Tools Command Prompt"
 
-Please set `GRPC_DEFAULT_SSL_ROOTS_FILE_PATH` env variable on Windows before starting the test app:
+Please set `GRPC_DEFAULT_SSL_ROOTS_FILE_PATH` env variable on Windows before starting the test app.
+
 For example:
+
 `set GRPC_DEFAULT_SSL_ROOTS_FILE_PATH=c:\path\to\this\file\grpc\etc\roots.pem`
