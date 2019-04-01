@@ -1,7 +1,7 @@
 # Based on this gRPC cmake example
 # https://github.com/grpc/grpc/blob/v1.19.0/examples/cpp/helloworld/CMakeLists.txt
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 project(autheid_sample C CXX)
 
