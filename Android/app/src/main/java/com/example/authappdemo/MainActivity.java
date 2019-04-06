@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity
 {
   final static String TAG = "AuthAppDemo";
 
-  final static String apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ";
+  final static String apiKey = "Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD";
   final static String baseUrl = "https://api.staging.autheid.com/v1";
 
   static private RequestQueue requestQueue_;
@@ -67,7 +66,12 @@ public class MainActivity extends AppCompatActivity
           public void onResponse(JSONObject response) {
             try {
               String status = response.getString("status");
-              showMessage("status: " + status);
+              String msg = "status: " + status;
+              if (status.equals("SUCCESS")) {
+                String email = response.getString("email");
+                msg += ", email: " + email;
+              }
+              showMessage(msg);
             } catch (JSONException e) {
               showError(e);
             }
@@ -96,13 +100,11 @@ public class MainActivity extends AppCompatActivity
   }
 
   void postData() {
-    EditText editTextLogin = findViewById(R.id.editTextLogin);
-
     JSONObject json = new JSONObject();
     try {
-      json.put("email", editTextLogin.getText().toString());
       json.put("title", "Test Login");
       json.put("type", "AUTHENTICATION");
+      json.put("use_local_account", true);
     } catch (JSONException e) {
       showMessage("error: " + e.toString());
     }
@@ -117,7 +119,8 @@ public class MainActivity extends AppCompatActivity
               showMessage("requestId: " + requestId);
               queryRequest(requestId);
 
-              Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("autheid://request"));
+              String url = "autheid://autheid.com/app/requests/?request_id=" + requestId;
+              Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
               try {
                 startActivity(browserIntent);
               } catch (ActivityNotFoundException e) {

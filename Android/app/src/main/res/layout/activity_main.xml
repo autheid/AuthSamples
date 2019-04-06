@@ -16,19 +16,26 @@
         android:layout_weight="1"
         />
 
-    <EditText
-        android:id="@+id/editTextLogin"
-        android:hint="Login"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        />
+
+    <TextView
+        android:id="@+id/textViewStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text=""
+        android:lines="15"
+        android:background="@drawable/back"
         />
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
+        android:layout_weight="1"
         />
 
     <Button
@@ -42,20 +49,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        />
-
-    <TextView
-        android:id="@+id/textViewStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:lines="10"
-        />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
         />
 
 </LinearLayout>
