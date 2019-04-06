@@ -73,7 +73,7 @@ class ViewController: UIViewController {
 
                         print("open", autheidUrl)
                         if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(u, options: [.universalLinksOnly:true]) {
+                            UIApplication.shared.open(u, options: [:]) {
                                 (success) in
                                 if (!success) {
                                     self.addMessage("Auth eID is not installed")
