@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+    <p id="labelStatus">Status...</p>
+    <p id="labelEmail">Email...</p>
+    <input id="buttonTest" type="button" value="Send Request" onclick="sendRequest();"/>
+  </body>
+</html>
+
+<script>
+  function isAndroid() {
+    var ua = navigator.userAgent.toLowerCase();
+    var isAndroid = ua.indexOf("android") > -1;
+    return isAndroid;
+  }
+
+  function createXhr(method, url) {
+    xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD");
+    return xhr;
+  }
+
+  function sendRequest() {
+    xhr = createXhr("POST", "https://api.staging.autheid.com/v1/requests");
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var response = JSON.parse(xhr.response);
+          loadResult(response.request_id);
+      }
+    };
+    var request = { 
+      "title": "Test Login", 
+      "type": "AUTHENTICATION",
+      "use_local_account": true
+    }
+    xhr.send(JSON.stringify(request));
+  }
+
+  function loadResult(requestId) {
+    console.log(requestId);
+    var url = "https://autheid.com/app/requests/?request_id=" + requestId;
+    if (!isAndroid()) {
+      url += "&callback=" + encodeURIComponent(document.location.href);
+    }
+    window.open(url);
+
+    xhr = createXhr("GET", "https://api.staging.autheid.com/v1/requests/" + requestId);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var response = JSON.parse(xhr.response);
+          console.log("got result: ", response);
+          document.getElementById("labelStatus").innerHTML = response.status;
+          if (response.status === "SUCCESS") {
+            document.getElementById("labelEmail").innerHTML = response.email;
+          } else {
+            document.getElementById("labelEmail").innerHTML = "";
+          }
+      }
+    };
+    xhr.send();
+  }
+</script>
