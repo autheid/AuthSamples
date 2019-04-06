@@ -11,24 +11,36 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var buttonClick: UIButton!
-    @IBOutlet weak var textLogin: UITextField!
     @IBOutlet weak var textViewLog: UITextView!
 
     let apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
     let baseUrl = "https://api.staging.autheid.com/v1"
-        
+    
+    var requestId: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(checkRequest), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    @objc func checkRequest() {
+        if !requestId.isEmpty {
+            self.readResult(requestId: requestId)
+        }
+    }
+
+    func addMessage(_ message: String) {
+        print(message)
+        self.textViewLog.text = message + "\n" + self.textViewLog.text
     }
 
     @IBAction func testClicked(_ sender: Any) {
-        let url = URL(string: "autheid://request?url=autheiddemo%3A%2F%2Ftest")!
-        
         // prepare json data
         let json: [String: Any] = [
-            "email": textLogin.text!,
+            "use_local_account": true,
             "title": "Test Login",
-            "type": "AUTHENTICATION"
+            "type": "AUTHENTICATION",
+            "timeout_seconds": 30,
         ]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
@@ -45,30 +57,30 @@ class ViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                self.addMessage(error?.localizedDescription ?? "No data")
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
-                let requestId = responseJSON["request_id"] as? String ?? ""
-                if !requestId.isEmpty {
+                self.requestId = responseJSON["request_id"] as? String ?? ""
+                if !self.requestId.isEmpty {
                     DispatchQueue.main.async() {
-                        print("requestId: \(requestId)")
-                        self.textViewLog.text = "requestId: \(requestId)\n" + self.textViewLog.text
-                        self.readResult(requestId: requestId)
+                        self.addMessage("requestId: \(self.requestId)")
 
-                        print("open", url)
+                        let autheidUrl = "autheid://autheid.com/app/requests/?callback=autheiddemo%3A%2F%2Ftest&request_id=" + self.requestId
+                        let u = URL(string: autheidUrl)!
+
+                        print("open", autheidUrl)
                         if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            UIApplication.shared.open(u, options: [:], completionHandler: nil)
                         } else {
-                            UIApplication.shared.openURL(url)
+                            UIApplication.shared.openURL(u)
                         }
                     }
                 } else if let errorMsg = responseJSON["message"] as? String {
                     DispatchQueue.main.async() {
-                        print("errorMsg: \(errorMsg)")
-                        self.textViewLog.text = "errorMsg: \(errorMsg)\n" + self.textViewLog.text
+                        self.addMessage("request failed: \(errorMsg)")
                     }
                 }
             }
@@ -85,17 +97,24 @@ class ViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+                self.addMessage(error?.localizedDescription ?? "Unknown error")
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
                 if let status = responseJSON["status"] as? String {
+                    let email = responseJSON["email"]
                     DispatchQueue.main.async() {
-                        print("status: \(status)")
-                        self.textViewLog.text = "status: \(status)\n" + self.textViewLog.text
+                        var message = "status: \(status)"
+                        if email != nil {
+                            message += ", email: \(email!)"
+                        }
+                        self.addMessage(message)
+                        self.requestId = ""
                     }
+                } else {
+                    self.addMessage("Invalid JSON")
                 }
             }
         }

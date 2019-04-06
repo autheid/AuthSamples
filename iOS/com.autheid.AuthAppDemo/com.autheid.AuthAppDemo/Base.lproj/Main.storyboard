@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,23 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xGO-CF-k5j">
-                                <rect key="frame" x="75" y="125" width="225" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VWF-KU-M5D">
-                                <rect key="frame" x="29" y="302" width="317" height="249"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWF-KU-M5D">
+                                <rect key="frame" x="29" y="60" width="317" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64U-bN-zLO">
-                                <rect key="frame" x="120" y="174" width="134" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeT-uU-bHa">
+                                <rect key="frame" x="29" y="31" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64U-bN-zLO">
+                                <rect key="frame" x="120" y="543" width="135" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="testClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKl-AU-Aj1"/>
@@ -42,13 +44,23 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VeT-uU-bHa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="11" id="1he-je-lwT"/>
+                            <constraint firstItem="VWF-KU-M5D" firstAttribute="top" secondItem="VeT-uU-bHa" secondAttribute="bottom" constant="8" symbolic="YES" id="LxZ-TW-8Wd"/>
+                            <constraint firstItem="VeT-uU-bHa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="MQe-zl-8Nk"/>
+                            <constraint firstItem="VeT-uU-bHa" firstAttribute="leading" secondItem="VWF-KU-M5D" secondAttribute="leading" id="QLM-vS-YOs"/>
+                            <constraint firstItem="VWF-KU-M5D" firstAttribute="centerX" secondItem="64U-bN-zLO" secondAttribute="centerX" id="RNN-rn-V2i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="64U-bN-zLO" secondAttribute="bottom" constant="50" id="gUy-6f-LlD"/>
+                            <constraint firstItem="64U-bN-zLO" firstAttribute="top" secondItem="VWF-KU-M5D" secondAttribute="bottom" constant="8" symbolic="YES" id="gXb-E4-oDC"/>
+                            <constraint firstItem="64U-bN-zLO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="120" id="hw2-ht-zUv"/>
+                            <constraint firstItem="VWF-KU-M5D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="str-K9-WTo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonClick" destination="64U-bN-zLO" id="Qq3-Lv-abh"/>
-                        <outlet property="textLogin" destination="xGO-CF-k5j" id="3qp-cg-hTV"/>
                         <outlet property="textViewLog" destination="VWF-KU-M5D" id="vve-Zq-TC2"/>
                     </connections>
                 </viewController>
