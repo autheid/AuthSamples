@@ -8,6 +8,7 @@
     <p>Status: <span id="labelStatus"></span></p>
     <p>Email: <span id="labelEmail"></span></p>
     <p>Request ID: <span id="labelRequestId"></span></p>
+    <p>Local email: <input id="inputEmailOptional" type="email" placeholder="Optional"></p>
     <input id="buttonTest" type="button" value="Send Request" onclick="sendRequest();"/>
     <input id="buttonProceed" type="button" value="Proceed" onclick="loadResult();"/>
   </body>
@@ -55,9 +56,14 @@
 
     document.getElementById("labelStatus").innerHTML = "Waiting...";
 
+    var emailOptional = document.getElementById("inputEmailOptional").value;
+
     var url = "https://autheid.com/app/requests/?request_id=" + currentRequestId;
     if (!isAndroid()) {
       url += "&callback=" + encodeURIComponent(document.location.href + "?request_id=" + currentRequestId);
+    }
+    if (emailOptional) {
+      url += "&email=" + encodeURIComponent(emailOptional);
     }
     window.open(url);
 
