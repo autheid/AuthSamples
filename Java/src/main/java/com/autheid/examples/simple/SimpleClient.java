@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.autheid.api.Rp;
 import com.autheid.api.RequestsGrpc;
+import com.google.protobuf.util.JsonFormat;
 
 import org.bouncycastle.cert.ocsp.BasicOCSPResp;
 import org.bouncycastle.cert.ocsp.CertificateStatus;
@@ -137,28 +138,49 @@ public class SimpleClient {
 
       if (resultResponse.getStatus() == Rp.RequestStatus.SUCCESS) {
         byte[] data = resultResponse.getSignature().getSignatureData().toByteArray();
+        String dataString = new String(data);
+
+        // All checks below is optional because Auth eID server verifies all this
+        Rp.GetResultResponse.SignatureResult.SignatureData.Builder signatureDataBuilder
+            = Rp.GetResultResponse.SignatureResult.SignatureData.newBuilder();
+        JsonFormat.parser().ignoringUnknownFields().merge(dataString, signatureDataBuilder);
+        Rp.GetResultResponse.SignatureResult.SignatureData signatureData = signatureDataBuilder.build();
+
+        // Verify that user has signed what was requested
+        if (!signatureData.getEmail().equals(email)) {
+          throw new Exception("invalid response");
+        }
+        if (!signatureData.getTitle().equals(title)) {
+          throw new Exception("invalid response");
+        }
+
         byte[] sign = resultResponse.getSignature().getSign().toByteArray();
-        byte[] ocsp = resultResponse.getSignature().getOcspResponse().toByteArray();
         X509Certificate root = loadCert(rootCA.getBytes());
         X509Certificate client = loadCert(resultResponse.getSignature().getCertificateClient().toByteArray());
         X509Certificate issuer = loadCert(resultResponse.getSignature().getCertificateIssuer().toByteArray());
 
+        // Verify client's certificate
         client.verify(issuer.getPublicKey());
+
+        // Verify issuer's certificate
         issuer.verify(root.getPublicKey());
 
+        // Verify client's signature
         Signature signature = Signature.getInstance("SHA256withECDSA");
         signature.initVerify(client.getPublicKey());
         signature.update(data);
-
         if (!signature.verify(sign)) {
           throw new Exception("invalid signature");
         }
 
+        // Verify OCSP response for the client's certificate
+        byte[] ocsp = resultResponse.getSignature().getOcspResponse().toByteArray();
         OCSPResp resp = new OCSPResp(ocsp);
         BasicOCSPResp basicResp = (BasicOCSPResp)resp.getResponseObject();
 
         ContentVerifierProvider verifier = new JcaContentVerifierProviderBuilder()
             .setProvider(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME)).build(issuer);
+        // OCSP should be signed by client's certificate issuer, verify its signature
         if (!basicResp.isSignatureValid(verifier)) {
           throw new Exception("Invalid OCSP signature!");
         }
