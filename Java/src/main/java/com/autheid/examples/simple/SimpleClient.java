@@ -40,14 +40,17 @@ public class SimpleClient {
   private final static String server = "api.staging.autheid.com";
 
   private final static String rootCA = "-----BEGIN CERTIFICATE-----\n" +
-      "MIIBYTCCAQigAwIBAgIUTS0DdUWXx6vJmOx/F3g+jehUoyUwCgYIKoZIzj0EAwIw\n" +
-      "DzENMAsGA1UEAxMEUm9vdDAeFw0xOTA0MjExMjQyMDBaFw0yNDA0MTkxMjQyMDBa\n" +
-      "MA8xDTALBgNVBAMTBFJvb3QwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASWm3OT\n" +
-      "csvuSZLY/WzPtbEx996x+LUlCd/GdSe+A/aw86yEbK5gm9p/Vxq7LwPOIOHO/Q7X\n" +
-      "Vtz21asiT/mwmK2Yo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB\n" +
-      "/zAdBgNVHQ4EFgQUWkoQA0l2AX7fe5fs7VbMuDc/T5UwCgYIKoZIzj0EAwIDRwAw\n" +
-      "RAIgVEPhdjpwyGgoulHW/QgZREEd59l279o6g3cCE6acdA0CIByuVzaaUHBioXGK\n" +
-      "DM3jUmdE6/OQTERUgZSxp4gtLIDu\n" +
+      "MIICCTCCAa6gAwIBAgIUDQ0ZOshos+Df4e+32GuBzDUMVV4wCgYIKoZIzj0EAwIw\n" +
+      "YjEcMBoGA1UEChMTQXV0aGVudGljYXRlIGVJRCBBQjEfMB0GA1UECxMWVGVzdCBJ\n" +
+      "bmZyYXN0cnVjdHVyZSBDQTEhMB8GA1UEAxMYVGVzdCBBdXRoIGVJRCBSb290IENB\n" +
+      "IHYxMB4XDTE5MDQzMDEzMzMwMFoXDTQ5MDQyMjEzMzMwMFowYjEcMBoGA1UEChMT\n" +
+      "QXV0aGVudGljYXRlIGVJRCBBQjEfMB0GA1UECxMWVGVzdCBJbmZyYXN0cnVjdHVy\n" +
+      "ZSBDQTEhMB8GA1UEAxMYVGVzdCBBdXRoIGVJRCBSb290IENBIHYxMFkwEwYHKoZI\n" +
+      "zj0CAQYIKoZIzj0DAQcDQgAEF+atF0+N09FoUHLDW39TDNRg9xA802BzC9oowzd1\n" +
+      "9DCO6Y87vPTqEeW/IDJ7TLb+E70LG6dsclUhsSq9ccKx86NCMEAwDgYDVR0PAQH/\n" +
+      "BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFJtSbGKYkwv6BUDiG74Z\n" +
+      "tTa3A/e5MAoGCCqGSM49BAMCA0kAMEYCIQC6rE3FhDXlh1vHlQqAePL9HEAfYAKa\n" +
+      "0yisHmCUrj90IwIhAOiwtT2IxmelQm1zFACCPB2TfLjwMGPjszQGTJF6DpYj\n" +
       "-----END CERTIFICATE-----\n";
 
   private SimpleClient(String host, int port) {
