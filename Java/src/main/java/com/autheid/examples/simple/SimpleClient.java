@@ -151,10 +151,10 @@ public class SimpleClient {
 
         // Verify that user has signed what was requested
         if (!signatureData.getEmail().equals(email)) {
-          throw new Exception("invalid response");
+          throw new Exception("Invalid response email!");
         }
         if (!signatureData.getTitle().equals(title)) {
-          throw new Exception("invalid response");
+          throw new Exception("Invalid response title!");
         }
 
         byte[] sign = resultResponse.getSignature().getSign().toByteArray();
@@ -173,7 +173,7 @@ public class SimpleClient {
         signature.initVerify(client.getPublicKey());
         signature.update(data);
         if (!signature.verify(sign)) {
-          throw new Exception("invalid signature");
+          throw new Exception("Invalid client's signature!");
         }
 
         // Verify OCSP response for the client's certificate
@@ -192,19 +192,19 @@ public class SimpleClient {
 
         CertificateStatus status = singleResp.getCertStatus();
         if (status != CertificateStatus.GOOD) {
-          throw new Exception("Invalid client's certificate status");
+          throw new Exception("Invalid client's certificate status!");
         }
 
         if (!singleResp.getCertID().getSerialNumber().equals(client.getSerialNumber())) {
-          throw new Exception("Invalid OCSP response!");
+          throw new Exception("Invalid OCSP response serial number!");
         }
 
         Date signTimestamp = new Date(resultResponse.getTimestampCreated() * 1000L);
         if (signTimestamp.compareTo(singleResp.getThisUpdate()) < 0) {
-          throw new Exception("Invalid OCSP response!");
+          throw new Exception("Invalid OCSP response this update timestamp!");
         }
         if (signTimestamp.compareTo(singleResp.getNextUpdate()) > 0) {
-          throw new Exception("Invalid OCSP response!");
+          throw new Exception("Invalid OCSP response next update timestamp!");
         }
       }
 
