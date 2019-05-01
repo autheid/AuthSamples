@@ -228,7 +228,7 @@ public class SimpleClient {
 
     SimpleClient client = new SimpleClient(server, 443);
     try {
-      String email = "test3@verified-fast.com";
+      String email = "test@example.com";
       if (args.length > 0) {
         email = args[0];
       }
