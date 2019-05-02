@@ -40,18 +40,20 @@ public class SimpleClient {
   private final static String server = "api.staging.autheid.com";
 
   private final static String rootCA = "-----BEGIN CERTIFICATE-----\n" +
-      "MIICCTCCAa6gAwIBAgIUDQ0ZOshos+Df4e+32GuBzDUMVV4wCgYIKoZIzj0EAwIw\n" +
-      "YjEcMBoGA1UEChMTQXV0aGVudGljYXRlIGVJRCBBQjEfMB0GA1UECxMWVGVzdCBJ\n" +
-      "bmZyYXN0cnVjdHVyZSBDQTEhMB8GA1UEAxMYVGVzdCBBdXRoIGVJRCBSb290IENB\n" +
-      "IHYxMB4XDTE5MDQzMDEzMzMwMFoXDTQ5MDQyMjEzMzMwMFowYjEcMBoGA1UEChMT\n" +
-      "QXV0aGVudGljYXRlIGVJRCBBQjEfMB0GA1UECxMWVGVzdCBJbmZyYXN0cnVjdHVy\n" +
-      "ZSBDQTEhMB8GA1UEAxMYVGVzdCBBdXRoIGVJRCBSb290IENBIHYxMFkwEwYHKoZI\n" +
-      "zj0CAQYIKoZIzj0DAQcDQgAEF+atF0+N09FoUHLDW39TDNRg9xA802BzC9oowzd1\n" +
-      "9DCO6Y87vPTqEeW/IDJ7TLb+E70LG6dsclUhsSq9ccKx86NCMEAwDgYDVR0PAQH/\n" +
-      "BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFJtSbGKYkwv6BUDiG74Z\n" +
-      "tTa3A/e5MAoGCCqGSM49BAMCA0kAMEYCIQC6rE3FhDXlh1vHlQqAePL9HEAfYAKa\n" +
-      "0yisHmCUrj90IwIhAOiwtT2IxmelQm1zFACCPB2TfLjwMGPjszQGTJF6DpYj\n" +
+      "MIICIzCCAcigAwIBAgIUWnc6Q+P0XKMk54FOVi0dKLFM/ZUwCgYIKoZIzj0EAwIw\n" +
+      "bzELMAkGA1UEBhMCU0UxHDAaBgNVBAoTE0F1dGhlbnRpY2F0ZSBlSUQgQUIxHzAd\n" +
+      "BgNVBAsTFlRlc3QgSW5mcmFzdHJ1Y3R1cmUgQ0ExITAfBgNVBAMTGFRlc3QgQXV0\n" +
+      "aCBlSUQgUm9vdCBDQSB2MTAeFw0xOTA1MDIxNDEzMDBaFw00OTA0MjQxNDEzMDBa\n" +
+      "MG8xCzAJBgNVBAYTAlNFMRwwGgYDVQQKExNBdXRoZW50aWNhdGUgZUlEIEFCMR8w\n" +
+      "HQYDVQQLExZUZXN0IEluZnJhc3RydWN0dXJlIENBMSEwHwYDVQQDExhUZXN0IEF1\n" +
+      "dGggZUlEIFJvb3QgQ0EgdjEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARdudVi\n" +
+      "T2L/KUFS3zWI9DZdNqeNuVVmrJd/8HWxw/29Nqo96Rdp1xRvkuIK3zKQCAsACES7\n" +
+      "yuEosSuUKdweB4Qto0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB\n" +
+      "/zAdBgNVHQ4EFgQUZhYmI9rvYuYAdCw7P85akPKCRj0wCgYIKoZIzj0EAwIDSQAw\n" +
+      "RgIhAP4WZWG3fTasg1iRiRh34hqGdRvo30qLdGqtWXql6xi2AiEAiD/FWBf68vKp\n" +
+      "lWhMdZq7rkzINdq/qQSMFHDJ8OAf0Jc=\n" +
       "-----END CERTIFICATE-----\n";
+
 
   private SimpleClient(String host, int port) {
     this(ManagedChannelBuilder.forAddress(host, port).useTransportSecurity().build());
