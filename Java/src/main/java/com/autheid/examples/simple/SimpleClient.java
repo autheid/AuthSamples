@@ -40,19 +40,22 @@ public class SimpleClient {
   private final static String server = "api.staging.autheid.com";
 
   private final static String rootCA = "-----BEGIN CERTIFICATE-----\n" +
-      "MIICIzCCAcigAwIBAgIUWnc6Q+P0XKMk54FOVi0dKLFM/ZUwCgYIKoZIzj0EAwIw\n" +
-      "bzELMAkGA1UEBhMCU0UxHDAaBgNVBAoTE0F1dGhlbnRpY2F0ZSBlSUQgQUIxHzAd\n" +
-      "BgNVBAsTFlRlc3QgSW5mcmFzdHJ1Y3R1cmUgQ0ExITAfBgNVBAMTGFRlc3QgQXV0\n" +
-      "aCBlSUQgUm9vdCBDQSB2MTAeFw0xOTA1MDIxNDEzMDBaFw00OTA0MjQxNDEzMDBa\n" +
-      "MG8xCzAJBgNVBAYTAlNFMRwwGgYDVQQKExNBdXRoZW50aWNhdGUgZUlEIEFCMR8w\n" +
-      "HQYDVQQLExZUZXN0IEluZnJhc3RydWN0dXJlIENBMSEwHwYDVQQDExhUZXN0IEF1\n" +
-      "dGggZUlEIFJvb3QgQ0EgdjEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARdudVi\n" +
-      "T2L/KUFS3zWI9DZdNqeNuVVmrJd/8HWxw/29Nqo96Rdp1xRvkuIK3zKQCAsACES7\n" +
-      "yuEosSuUKdweB4Qto0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB\n" +
-      "/zAdBgNVHQ4EFgQUZhYmI9rvYuYAdCw7P85akPKCRj0wCgYIKoZIzj0EAwIDSQAw\n" +
-      "RgIhAP4WZWG3fTasg1iRiRh34hqGdRvo30qLdGqtWXql6xi2AiEAiD/FWBf68vKp\n" +
-      "lWhMdZq7rkzINdq/qQSMFHDJ8OAf0Jc=\n" +
-      "-----END CERTIFICATE-----\n";
+      "MIICpzCCAi2gAwIBAgIVANCWAAe4NB0AbzvcOMzVt/eXvJOEMAoGCCqGSM49BAMD\n" +
+      "MHQxCzAJBgNVBAYTAlNFMSEwHwYDVQQKExhUZXN0IEF1dGhlbnRpY2F0ZSBlSUQg\n" +
+      "QUIxHzAdBgNVBAsTFlRlc3QgSW5mcmFzdHJ1Y3R1cmUgQ0ExITAfBgNVBAMTGFRl\n" +
+      "c3QgQXV0aCBlSUQgUm9vdCBDQSB2MTAiGA8yMDE5MDUyMTAwMDAwMFoYDzIwMzkw\n" +
+      "NTIxMDAwMDAwWjB0MQswCQYDVQQGEwJTRTEhMB8GA1UEChMYVGVzdCBBdXRoZW50\n" +
+      "aWNhdGUgZUlEIEFCMR8wHQYDVQQLExZUZXN0IEluZnJhc3RydWN0dXJlIENBMSEw\n" +
+      "HwYDVQQDExhUZXN0IEF1dGggZUlEIFJvb3QgQ0EgdjEwdjAQBgcqhkjOPQIBBgUr\n" +
+      "gQQAIgNiAATttsFmSGlfGgeBWCO+G4j+LaheRZksckdz0ks2DrUz+eBLAdY5neE1\n" +
+      "uwvidGXuebR4c3Kr7TbBZaQbmIHEd3kUTQ4paqKWQKgck5WJNYPm2wgpS7co8Fjk\n" +
+      "jaFG4Mu9QZujezB5MB0GA1UdDgQWBBRaWiMIx4yz8dBVsBVyR0qL9wVSejAOBgNV\n" +
+      "HQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAWBgNVHSAEDzANMAsGCSqFcL2E\n" +
+      "PwEBATAfBgNVHSMEGDAWgBRaWiMIx4yz8dBVsBVyR0qL9wVSejAKBggqhkjOPQQD\n" +
+      "AwNoADBlAjBaJB4PI9hFk0teclJEPWfXUt1CovrWY3nWlOkyl+usJFkgJZH1yIFI\n" +
+      "uYVsbv9LK7QCMQCc9MQEu9tZLzVCcucBy2tbNYF1BPUE4Z51gohpiBTxbosqy9L2\n" +
+      "61lZsHVbH/v/HtY=\n" +
+      "-----END CERTIFICATE-----\n";;
 
 
   private SimpleClient(String host, int port) {
@@ -163,6 +166,8 @@ public class SimpleClient {
         X509Certificate root = loadCert(rootCA.getBytes());
         X509Certificate client = loadCert(resultResponse.getSignature().getCertificateClient().toByteArray());
         X509Certificate issuer = loadCert(resultResponse.getSignature().getCertificateIssuer().toByteArray());
+
+        logger.info("Client's name from the certificate: " + client.getSubjectDN().getName());
 
         // Verify client's certificate
         client.verify(issuer.getPublicKey());
