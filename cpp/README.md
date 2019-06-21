@@ -20,7 +20,7 @@ cd /path/to/this/file
 git clone https://github.com/randombit/botan
 cd botan
 git checkout 2.10.0
-python configure.py --amalgamation --single-amalgamation-file --minimized-build --enable-modules=auto_rng,system_rng,sha2_32,ecdsa,ecdh,ecies,chacha,kdf2 --disable-shared-library
+python configure.py --amalgamation --single-amalgamation-file --disable-modules=pkcs11,sha3 --disable-shared-library
 ```
 
 ## Build

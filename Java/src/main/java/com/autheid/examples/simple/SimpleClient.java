@@ -55,7 +55,7 @@ public class SimpleClient {
       "AwNoADBlAjBaJB4PI9hFk0teclJEPWfXUt1CovrWY3nWlOkyl+usJFkgJZH1yIFI\n" +
       "uYVsbv9LK7QCMQCc9MQEu9tZLzVCcucBy2tbNYF1BPUE4Z51gohpiBTxbosqy9L2\n" +
       "61lZsHVbH/v/HtY=\n" +
-      "-----END CERTIFICATE-----\n";;
+      "-----END CERTIFICATE-----\n";
 
 
   private SimpleClient(String host, int port) {
