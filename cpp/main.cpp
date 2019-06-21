@@ -23,7 +23,7 @@ bool makeRequest(PrivateKey *raPrivKey) {
    rp::CreateRequest createRequest;
    createRequest.set_type(rp::DEVICE_KEY);
    createRequest.set_title("Test");
-   createRequest.set_email("t@t.t");
+   createRequest.set_email("test@example.com");
    createRequest.mutable_device_key()->set_key_id("Test");
    createRequest.mutable_device_key()->set_use_new_devices(true);
    if (raPrivKey) {
