@@ -6,7 +6,7 @@ import rp_pb2
 import rp_pb2_grpc
 
 apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
-email = "test3@verified-fast.com"
+email = "test@example.com"
 
 metadata = [("authorization", "Bearer " + apiKey)]
 
