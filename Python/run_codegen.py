@@ -2,8 +2,8 @@ from grpc_tools import protoc
 
 protoc.main((
     '',
-    '--proto_path=.',
+    '--proto_path=../AuthAPI/proto',
     '--python_out=.',
     '--grpc_python_out=.',
-    'rp.proto',
+    '../AuthAPI/proto/rp.proto',
 ))
