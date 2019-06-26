@@ -5,10 +5,10 @@ import grpc
 import rp_pb2
 import rp_pb2_grpc
 
-apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
+api_key = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
 email = "test@example.com"
 
-metadata = [("authorization", "Bearer " + apiKey)]
+metadata = [("authorization", "Bearer " + api_key)]
 
 def send_request(stub):
     create_request = rp_pb2.CreateRequest()
