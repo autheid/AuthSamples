@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from __future__ import print_function
 
 import datetime
@@ -10,6 +12,7 @@ from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
+from cryptography.x509.oid import NameOID
 
 apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
 email = "test@example.com"
@@ -81,6 +84,13 @@ def send_request(stub):
 
         # verify signature
         client.public_key().verify(get_result_request.signature.sign, get_result_request.signature.signature_data, ec.ECDSA(hashes.SHA256()))
+
+        common_names = client.subject.get_attributes_for_oid(NameOID.COMMON_NAME)
+        if len(common_names) != 1:
+            raise Exception("invalid CN in the client's certificate")
+
+        # print unique user ID
+        print("unique user ID: {}".format(common_names[0].value))
 
         # check data that client has signed
         signature_data = rp_pb2.GetResultResponse.SignatureResult.SignatureData()

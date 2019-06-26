@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from __future__ import print_function
 
 import base64
@@ -9,6 +11,7 @@ from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
+from cryptography.x509.oid import NameOID
 
 api_key = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
 email = "test@example.com"
@@ -77,6 +80,13 @@ def send_request():
         issuer.public_key().verify(client.signature, client.tbs_certificate_bytes, ec.ECDSA(hashes.SHA384()))
 
         verify_ocsp(ocsp, client, issuer)
+
+        common_names = client.subject.get_attributes_for_oid(NameOID.COMMON_NAME)
+        if len(common_names) != 1:
+            raise Exception("invalid CN in the client's certificate")
+
+        # print unique user ID
+        print("unique user ID: {}".format(common_names[0].value))
 
         # verify signature
         signed_data_binary = base64.b64decode(signature["signature_data"])
