@@ -36,7 +36,7 @@ public class SimpleClient {
   private final ManagedChannel channel;
   private final RequestsGrpc.RequestsBlockingStub blockingStub;
 
-  private final static String apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ";
+  private final static String apiKey = "Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD";
   private final static String server = "api.staging.autheid.com";
 
   private final static String rootCA = "-----BEGIN CERTIFICATE-----\n" +

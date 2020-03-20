@@ -10,7 +10,7 @@ namespace SimpleClient
     {
         public static void Main(string[] args)
         {
-            var apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ";
+            var apiKey = "Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD";
             var email = "test3@verified-fast.com";
 
             AsyncAuthInterceptor authInterceptor = new AsyncAuthInterceptor((context, metadata) =>
@@ -48,7 +48,7 @@ namespace SimpleClient
                 Console.WriteLine("Last Name: " + resultReply.Kyc.Identification.LastName);
                 Console.WriteLine("File size: " + resultReply.Kyc.KycPdf.Embedded.Length);
 
-                // Create a new file     
+                // Create a new file
                 using (FileStream fs = System.IO.File.Create("kyc.pdf"))
                 {
                     fs.Write(resultReply.Kyc.KycPdf.Embedded.ToByteArray(), 0, resultReply.Kyc.KycPdf.Embedded.Length);

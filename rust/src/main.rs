@@ -16,7 +16,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .intercept_headers(|headers| {
                 headers.insert(
                     "Authorization",
-                    http::header::HeaderValue::from_static("Bearer Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"),
+                    http::header::HeaderValue::from_static("Bearer Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD"),
                 );
             })
             .clone();

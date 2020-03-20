@@ -7,7 +7,7 @@ import grpc
 import rp_pb2
 import rp_pb2_grpc
 
-api_key = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
+api_key = "Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD"
 email = "test@example.com"
 
 metadata = [("authorization", "Bearer " + api_key)]

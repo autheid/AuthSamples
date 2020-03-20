@@ -13,11 +13,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonClick: UIButton!
     @IBOutlet weak var textViewLog: UITextView!
 
-    let apiKey = "Pj+Q9SsZloftMkmE7EhA8v2Bz1ZC9aOmUkAKTBW9hagJ"
+    let apiKey = "Pj+GIg2/l7ZKmicZi37+1giqKJ1WH3Vt8vSSxCuvPkKD"
     let baseUrl = "https://api.staging.autheid.com/v1"
-    
+
     var requestId: String = ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(checkRequest), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -42,19 +42,19 @@ class ViewController: UIViewController {
             "type": "AUTHENTICATION",
             "timeout_seconds": 30,
         ]
-        
+
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        
+
         // create post request
         let url2 = URL(string: baseUrl + "/requests")!
         var request = URLRequest(url: url2)
         request.setValue("Bearer " + apiKey, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-        
+
         // insert json data to the request
         request.httpBody = jsonData
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 self.addMessage(error?.localizedDescription ?? "No data")
@@ -92,14 +92,14 @@ class ViewController: UIViewController {
         }
         task.resume()
     }
-    
+
     func readResult(requestId: String) {
         // create post request
         let url = URL(string: "\(baseUrl)/requests/\(requestId)")!
         var request = URLRequest(url: url)
         request.setValue("Bearer " + apiKey, forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 self.addMessage(error?.localizedDescription ?? "Unknown error")
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
+
         task.resume()
     }
 }
