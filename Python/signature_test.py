@@ -51,7 +51,7 @@ def verify_ocsp(ocsp, cert, issuer):
     if ocsp.certificate_status != x509.ocsp.OCSPCertStatus.GOOD:
         raise Exception("invalid certificate status in the OCSP response")
 
-    if ocsp.next_update < datetime.datetime.now() - datetime.timedelta(seconds=30):
+    if ocsp.next_update < datetime.datetime.utcnow() - datetime.timedelta(seconds=30):
         raise Exception("invalid OCSP response next update time")
 
 def send_request(stub):
