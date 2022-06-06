@@ -7,7 +7,7 @@ edition = "2018"
 rand = "0.3.14"
 tonic = { version = "0.1.0-alpha.6", features = ["rustls", "rustls-roots"] }
 bytes = "0.4"
-prost = "0.5"
+prost = "0.6"
 prost-derive = "0.5"
 tokio = "=0.2.0-alpha.6"
 http = "0.1"
