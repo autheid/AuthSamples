@@ -9,7 +9,7 @@ tonic = { version = "0.1.0-alpha.6", features = ["rustls", "rustls-roots"] }
 bytes = "0.4"
 prost = "0.5"
 prost-derive = "0.5"
-tokio = "=0.2.0-alpha.6"
+tokio = "=1.8.4"
 http = "0.1"
 simple-error = "0.2"
 
